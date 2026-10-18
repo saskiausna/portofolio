@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1749a5">
+  <meta name="description" content="Personal portfolio Saskia Usna — mahasiswa TRM.">
+  <title>Saskia Usna — Personal Portfolio</title>
+  <style>
+    :root {
+      --blue: #1749a5;
+      --blue-dark: #12377c;
+      --yellow: #f4dc68;
+      --paper: #fffdf6;
+      --ink: #1f2d43;
+      --muted: #647084;
+      --line: #d9deea;
+      --shadow: 0 16px 42px rgba(30, 49, 82, .14);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(244,220,104,.24), transparent 25rem),
+        #f3f0e8;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .page { width: min(1120px, calc(100% - 40px)); margin: 34px auto; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      margin-bottom: 22px;
+    }
+    .brand { font-weight: 900; color: var(--blue); letter-spacing: -.04em; font-size: 1.15rem; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; }
+    .nav a {
+      text-decoration: none; font-size: .88rem; font-weight: 700; color: #34435c;
+      padding: 8px 12px; border-radius: 999px;
+    }
+    .nav a:hover, .nav a:focus-visible { background: white; outline: 2px solid var(--yellow); }
+    .hero {
+      position: relative; overflow: hidden; display: grid;
+      grid-template-columns: minmax(240px, .82fr) 1.5fr; gap: clamp(22px, 4vw, 52px);
+      padding: clamp(24px, 5vw, 58px); border: 1px solid rgba(23,73,165,.12);
+      border-radius: 24px; background: var(--paper); box-shadow: var(--shadow);
+    }
+    .hero::before {
+      content: ""; position: absolute; width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(244,220,104,.32); top: -175px; left: -95px; pointer-events: none;
+    }
+    .profile-column, .intro { position: relative; z-index: 1; }
+    .profile-card {
+      background: white; border: 1px solid var(--line); border-radius: 18px; padding: 14px;
+      transform: rotate(-1.2deg); box-shadow: 0 10px 25px rgba(28,48,82,.12);
+    }
+    .photo-placeholder {
+      min-height: 300px; border-radius: 12px; display: grid; place-items: center; text-align: center;
+      padding: 24px; color: var(--blue); font-weight: 800;
+      background: linear-gradient(145deg, #e5ecfa, #f8edb5);
+      border: 1px dashed #9baed4;
+    }
+    .photo-placeholder span { display: block; font-size: .82rem; font-weight: 500; color: #4d5d77; margin-top: 8px; }
+    .identity { padding: 18px 5px 3px; }
+    .identity h2 { margin: 0 0 3px; font-size: 1.05rem; }
+    .identity p { margin: 0; color: var(--muted); font-size: .92rem; overflow-wrap: anywhere; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 11px; border-radius: 5px;
+      background: var(--yellow); color: #27354a; text-transform: uppercase; letter-spacing: .12em;
+      font-size: .72rem; font-weight: 900;
+    }
+    h1 { color: var(--blue); font-size: clamp(2.5rem, 6vw, 5rem); line-height: .98; letter-spacing: -.065em; margin: 20px 0 16px; }
+    .intro .lead { font-size: clamp(1rem, 1.8vw, 1.18rem); color: #47546a; max-width: 58ch; }
+    .meta-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+    .meta { padding: 13px 15px; background: #f5f7fc; border-left: 4px solid var(--blue); border-radius: 8px; min-width: 0; }
+    .meta small { display: block; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; font-weight: 800; font-size: .68rem; }
+    .meta strong { display: block; overflow-wrap: anywhere; margin-top: 3px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; padding: 11px 17px;
+      border-radius: 9px; text-decoration: none; font-weight: 800; font-size: .9rem;
+      border: 2px solid var(--blue); background: var(--blue); color: white; transition: .2s ease;
+    }
+    .button.secondary { background: transparent; color: var(--blue); }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 7px 16px rgba(23,73,165,.17); }
+    .section { margin-top: 25px; padding: clamp(22px, 4vw, 38px); border-radius: 20px; background: white; box-shadow: var(--shadow); }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 15px; margin-bottom: 22px; }
+    .section-heading h2 { margin: 0; font-size: clamp(1.45rem, 3vw, 2rem); letter-spacing: -.04em; color: var(--blue); }
+    .section-heading p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+    .info-card { min-width: 0; border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: #fffefa; }
+    .icon {
+      display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 15px;
+      background: var(--yellow); border-radius: 12px; color: var(--blue); font-size: 1.2rem; font-weight: 900;
+    }
+    .info-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .info-card p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .placeholder { color: #8a94a5; font-style: italic; }
+    .timeline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .timeline-item { padding: 18px 20px; border-radius: 12px; background: #f6f8fc; border: 1px solid #e5e9f2; }
+    .timeline-item .year { color: var(--blue); font-size: .75rem; letter-spacing: .12em; font-weight: 900; text-transform: uppercase; }
+    .timeline-item h3 { margin: 7px 0 5px; font-size: 1rem; }
+    .timeline-item p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+    .project-art {
+      aspect-ratio: 16/10; border-radius: 10px; margin-bottom: 15px; display: grid; place-items: center;
+      background: repeating-linear-gradient(135deg, #e9eef9 0 14px, #f7f1cf 14px 28px);
+      color: var(--blue); font-size: .82rem; font-weight: 900; letter-spacing: .08em;
+      border: 1px dashed #bdc9df;
+    }
+    .project-card { padding: 14px; border: 1px solid var(--line); border-radius: 14px; }
+    .project-card h3 { margin: 0 0 5px; font-size: 1rem; }
+    .project-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .contact-strip {
+      display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+      background: var(--blue); color: white; padding: clamp(22px, 4vw, 38px); border-radius: 20px; margin-top: 25px;
+    }
+    .contact-strip h2 { margin: 0 0 5px; font-size: clamp(1.4rem, 3vw, 2rem); }
+    .contact-strip p { margin: 0; color: #dce6ff; }
+    .contact-strip .button { background: var(--yellow); color: var(--blue-dark); border-color: var(--yellow); }
+    footer { text-align: center; color: #737d8c; font-size: .82rem; padding: 24px 0 8px; }
+    @media (max-width: 760px) {
+      .page { width: min(100% - 24px, 620px); margin: 18px auto; }
+      .topbar { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .nav { gap: 2px; }
+      .nav a { padding: 7px 9px; font-size: .82rem; }
+      .hero { grid-template-columns: 1fr; padding: 20px; gap: 28px; border-radius: 18px; }
+      .profile-column { width: min(100%, 360px); margin: 0 auto; }
+      .photo-placeholder { min-height: 250px; }
+      h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
+      .meta-grid { gap: 9px; }
+      .cards, .project-grid { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: 1fr; }
+      .section { padding: 22px 18px; margin-top: 16px; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+      .contact-strip { margin-top: 16px; }
+    }
+    @media (max-width: 380px) {
+      .meta-grid { grid-template-columns: 1fr; }
+      .page { width: calc(100% - 18px); }
+      .hero { padding: 15px; }
+      .photo-placeholder { min-height: 210px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#home" style="text-decoration:none">SU<span style="color:#d3b832">.</span> PORTFOLIO</a>
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="#about">Tentang</a>
+        <a href="#skills">Keahlian</a>
+        <a href="#education">Pendidikan</a>
+        <a href="#projects">Proyek</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home" aria-labelledby="main-title">
+        <div class="profile-column">
+          <div class="profile-card">
+            <div class="photo-placeholder">
+              <div>FOTO PROFIL<span>Ganti area ini dengan foto kamu</span></div>
+            </div>
+            <div class="identity">
+              <h2>Saskia Usna</h2>
+              <p>Mahasiswa TRM · Politeknik Negeri Batam</p>
+            </div>
+          </div>
+        </div>
+        <div class="intro" id="about">
+          <span class="eyebrow">About me</span>
+          <h1 id="main-title">Halo, aku<br>Saskia Usna.</h1>
+          <p class="lead">Selamat datang di portofolio personal saya. Saya adalah mahasiswa program studi TRM yang tertarik untuk terus belajar, mengeksplorasi ide, dan mengembangkan kemampuan melalui proses akademik maupun proyek kreatif.</p>
+          <p class="lead placeholder">[Tambahkan deskripsi diri, minat, dan tujuan profesional di sini.]</p>
+          <div class="meta-grid">
+            <div class="meta"><small>Nama</small><strong>Saskia Usna</strong></div>
+            <div class="meta"><small>NIM</small><strong>4312401004</strong></div>
+            <div class="meta"><small>Program studi</small><strong>TRM</strong></div>
+            <div class="meta"><small>Domisili</small><strong class="placeholder">[Tambahkan domisili]</strong></div>
+          </div>
+          <div class="actions">
+            <a class="button" href="#projects">Lihat proyek <span aria-hidden="true">&nbsp;↗</span></a>
+            <a class="button secondary" href="#contact">Hubungi saya</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section-heading">
+          <h2>Keahlian & software</h2>
+          <p>Bagian ini bisa dilengkapi nanti.</p>
+        </div>
+        <div class="cards">
+          <article class="info-card">
+            <div class="icon" aria-hidden="true">✳</div>
+            <h3>Keahlian</h3>
+            <p class="placeholder">[Tambahkan keahlian utama, misalnya komunikasi, desain, riset, atau lainnya.]</p>
+          </article>
+          <article class="info-card">
+            <div class="icon" aria-hidden="true">⌘</div>
+            <h3>Software</h3>
+            <p class="placeholder">[Tambahkan software yang dikuasai beserta tingkat kemampuan.]</p>
+          </article>
+          <article class="info-card">
+            <div class="icon" aria-hidden="true">✦</div>
+            <h3>Minat</h3>
+            <p class="placeholder">[Tuliskan bidang atau topik yang sedang ingin dipelajari.]</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <div class="section-heading">
+          <h2>Pendidikan & pengalaman</h2>
+          <p>Perjalanan belajar saya.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="year">Pendidikan · [Tahun]</span>
+            <h3>Politeknik Negeri Batam</h3>
+            <p>Program Studi TRM · NIM 4312401004</p>
+          </article>
+          <article class="timeline-item">
+            <span class="year">Pengalaman · [Tahun]</span>
+            <h3 class="placeholder">[Nama organisasi / kegiatan]</h3>
+            <p class="placeholder">[Tuliskan peran, tanggung jawab, atau hal yang dipelajari.]</p>
+          </article>
+          <article class="timeline-item">
+            <span class="year">Sertifikasi · [Tahun]</span>
+            <h3 class="placeholder">[Nama pelatihan atau sertifikat]</h3>
+            <p class="placeholder">[Penyelenggara dan keterampilan yang diperoleh.]</p>
+          </article>
+          <article class="timeline-item">
+            <span class="year">Pencapaian · [Tahun]</span>
+            <h3 class="placeholder">[Nama pencapaian]</h3>
+            <p class="placeholder">[Deskripsi singkat pencapaian, penghargaan, atau kontribusi.]</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <h2>Proyek pilihan</h2>
+          <p>Ganti placeholder dengan karya terbaikmu.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-art">PROJECT 01</div>
+            <h3>[Nama proyek pertama]</h3>
+            <p>[Ringkasan proyek, tujuan, dan kontribusi kamu.]</p>
+          </article>
+          <article class="project-card">
+            <div class="project-art">PROJECT 02</div>
+            <h3>[Nama proyek kedua]</h3>
+            <p>[Ceritakan proses, tools yang dipakai, dan hasilnya.]</p>
+          </article>
+          <article class="project-card">
+            <div class="project-art">PROJECT 03</div>
+            <h3>[Nama proyek ketiga]</h3>
+            <p>[Tambahkan tautan atau deskripsi singkat karya.]</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-strip" id="contact">
+        <div>
+          <h2>Mari terhubung!</h2>
+          <p class="placeholder">[Tambahkan kalimat ajakan dan informasi kontak kamu.]</p>
+        </div>
+        <a class="button" href="mailto:emailkamu@example.com">Email saya ↗</a>
+      </section>
+    </main>
+    <footer>© <span id="year"></span> Saskia Usna · Personal Portfolio</footer>
+  </div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
